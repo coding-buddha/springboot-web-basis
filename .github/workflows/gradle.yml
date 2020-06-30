@@ -20,6 +20,11 @@ jobs:
       run: chmod +x gradlew
     - name: Build with Gradle
       run: ./gradlew bootJar
+    - name: Run ls -al
+      run: |
+        ls -al
+        ls -al ./build
+        ls -al ./build/libs
     - name: Copy file via ssh password
       uses: garygrossgarten/github-action-scp@release
       with:
@@ -27,5 +32,5 @@ jobs:
         port: ${{ secrets.PORT }}
         username: ${{ secrets.USERNAME }}
         password: ${{ secrets.PASSWORD }}
-        local: ./build/libs/springboot-web-1.0.0.jar
+        local: ./build/libs/
         remote: /volume1/docker/deploy/sample/ # NAS 경로
