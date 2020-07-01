@@ -1,6 +1,8 @@
 # This workflow will build a Java project with Gradle
 # For more information see: https://help.github.com/actions/language-and-framework-guides/building-and-testing-java-with-gradle
 
+# NAS 쪽에 Azure data center 쪽 IP 대역대 허용해주어야 한다.
+
 name: Java CI with Gradle
 
 on:
