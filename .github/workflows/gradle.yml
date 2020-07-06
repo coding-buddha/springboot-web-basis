@@ -24,6 +24,8 @@ jobs:
 #      run: ./gradlew bootJar
 #    - name: Grant 777 permission
 #      run: chmod -R 777 ./build/libs
+    - name: Grant 777 permission
+      run: chmod -R 777 ./http
     - name: Copy file via ssh password
       uses: garygrossgarten/github-action-scp@release
       with:
