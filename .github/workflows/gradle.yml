@@ -26,6 +26,7 @@ jobs:
 #      run: chmod -R 777 ./build/libs
     - name: Grant 777 permission
       run: |
+        chmod 777 ./http
         ls -al
         chmod -R 777 ./http
         ls -al ./http/
