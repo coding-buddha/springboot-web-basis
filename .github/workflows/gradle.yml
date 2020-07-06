@@ -35,5 +35,5 @@ jobs:
         password: ${{ secrets.PASSWORD }}
 #        local: ./build/libs/springboot-web-basis-1.0.0.jar
         local: ./http/pet.http
-        remote: ~/deploy/
+        remote: /var/services/homes/pasudo123/deploy/
 #        remote: /volume1/docker/deploy/sample/ # NAS 경로
