@@ -24,12 +24,12 @@ jobs:
 #      run: ./gradlew bootJar
 #    - name: Grant 777 permission
 #      run: chmod -R 777 ./build/libs
-    - name: Grant 777 permission
-      run: |
-        chmod 777 ./http
-        ls -al
-        chmod -R 777 ./http
-        ls -al ./http/
+#    - name: Grant 777 permission
+#      run: |
+#        chmod 777 ./http
+#        ls -al
+#        chmod -R 777 ./http
+#        ls -al ./http/
     - name: Copy file via ssh password
       uses: appleboy/scp-action@master
       with:
