@@ -11,8 +11,10 @@ import edu.pasudo123.study.web.petclinic.model.PetType;
 
 import java.io.IOException;
 import java.text.Format;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class JacksonCustomPetDeserializer extends StdDeserializer<Pet> {
 
@@ -27,22 +29,25 @@ public class JacksonCustomPetDeserializer extends StdDeserializer<Pet> {
     @Override
     public Pet deserialize(JsonParser parser, DeserializationContext context) throws IOException, JsonProcessingException {
 
-        final Format formatter = new SimpleDateFormat("yyyy/MM/dd");
+        final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
         final ObjectMapper mapper = new ObjectMapper();
         final Pet pet = new Pet();
 
-        PetType type = new PetType();
         LocalDateTime birthDate = null;
 
         JsonNode node = parser.getCodec().readTree(parser);
         JsonNode typeNode = node.get("type");
-        type = mapper.treeToValue(typeNode, PetType.class);
 
+        // type
+        final PetType type = mapper.treeToValue(typeNode, PetType.class);
+
+        // pet
         final long petId = node.get("id").asLong();
         final String name = node.get("name").asText(null);
         final String birthDateStr = node.get("birthDate").asText(null);
 
         // birthdate formatter
+        birthDate = LocalDateTime.parse(birthDateStr, formatter);
 
         if(petId != 0) {
             pet.setId(petId);

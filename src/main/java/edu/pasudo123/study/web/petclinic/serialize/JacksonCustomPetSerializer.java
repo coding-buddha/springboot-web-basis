@@ -9,6 +9,7 @@ import edu.pasudo123.study.web.petclinic.model.PetType;
 import java.io.IOException;
 import java.text.Format;
 import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
 
 /**
  * StdSerializer<Pet>
@@ -28,7 +29,7 @@ public class JacksonCustomPetSerializer extends StdSerializer<Pet> {
     @Override
     public void serialize(Pet pet, JsonGenerator gen, SerializerProvider provider) throws IOException {
 
-        final Format formatter = new SimpleDateFormat("yyyy/MM/dd");
+        final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
 
         // pet : start
         gen.writeStartObject();
@@ -39,7 +40,7 @@ public class JacksonCustomPetSerializer extends StdSerializer<Pet> {
         }
 
         gen.writeStringField("name", pet.getName());
-        gen.writeStringField("birthDate", formatter.format(pet.getBirthDate()));
+        gen.writeStringField("birthDate", pet.getBirthDate().format(formatter));
 
         final PetType petType = pet.getPetType();
         // petType : start
