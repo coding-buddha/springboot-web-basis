@@ -2,7 +2,9 @@ spring:
   profiles:
     active:
     include:
-      - petclinic
+      - override
+      - member
+#      - petclinic
 
 server:
   port: 9666

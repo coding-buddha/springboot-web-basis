@@ -1,4 +1,4 @@
-package edu.pasudo123.study.web.petclinic.security;
+package edu.pasudo123.study.web.config;
 
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Configuration;
@@ -6,7 +6,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
 @Configuration
-@ConditionalOnProperty(name = "petclinic.security.enable", havingValue = "false")
+@ConditionalOnProperty(name = "basis-web.security.enable", havingValue = "false")
 public class DisableSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
@@ -15,6 +15,9 @@ public class DisableSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .anyRequest().permitAll()
                     .and()
+
+                .headers().frameOptions().disable()
+                .and()
                 .csrf().disable();
     }
 }
