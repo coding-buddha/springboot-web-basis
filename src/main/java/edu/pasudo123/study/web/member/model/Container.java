@@ -22,9 +22,26 @@ public class Container {
     @Column(name = "name", columnDefinition = "VARCHAR(50)", unique = true)
     private String name;
 
+    @Enumerated(EnumType.STRING)
+    @Column(name = "STATUS", columnDefinition = "ENUM('ACTIVE', 'PENDING', 'DELETE')", nullable = false)
+    private State state;
+
+    private enum State {
+        ACTIVE, PENDING, DELETE
+    }
+
     public Container() {
         this.name = UUID.randomUUID().toString()
                 .replaceAll("-", Strings.EMPTY)
                 .substring(0, 9);
+        this.state = State.ACTIVE;
+    }
+
+    public void stateToPending() {
+        this.state = State.PENDING;
+    }
+
+    public void stateToDelete() {
+        this.state = State.DELETE;
     }
 }
