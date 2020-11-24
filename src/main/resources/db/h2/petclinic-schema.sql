@@ -1,20 +1,19 @@
-DROP TABLE vet_specialties IF EXISTS;
-DROP TABLE vets IF EXISTS;
-DROP TABLE specialties IF EXISTS;
-DROP TABLE visits IF EXISTS;
-DROP TABLE pets IF EXISTS;
-DROP TABLE types IF EXISTS;
-DROP TABLE owners IF EXISTS;
-DROP TABLE roles IF EXISTS;
-DROP TABLE users IF EXISTS;
-
 /** 커스터마이징 수행. **/
 CREATE TABLE pets (
-    id         INTEGER IDENTITY PRIMARY KEY,
-    name       VARCHAR(30),
+    id         BIGINT AUTO_INCREMENT PRIMARY KEY,
+    name       VARCHAR(50),
     birth_date DATETIME
 );
 
+
+-- DROP TABLE vet_specialties IF EXISTS;
+-- DROP TABLE vets IF EXISTS;
+-- DROP TABLE specialties IF EXISTS;
+-- DROP TABLE visits IF EXISTS;
+-- DROP TABLE types IF EXISTS;
+-- DROP TABLE owners IF EXISTS;
+-- DROP TABLE roles IF EXISTS;
+-- DROP TABLE users IF EXISTS;
 
 -- CREATE TABLE vets (
 --                       id         INTEGER IDENTITY PRIMARY KEY,

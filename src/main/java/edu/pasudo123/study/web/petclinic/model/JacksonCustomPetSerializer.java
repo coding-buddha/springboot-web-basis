@@ -1,14 +1,10 @@
-package edu.pasudo123.study.web.petclinic.serialize;
+package edu.pasudo123.study.web.petclinic.model;
 
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.databind.ser.std.StdSerializer;
-import edu.pasudo123.study.web.petclinic.model.Pet;
-import edu.pasudo123.study.web.petclinic.model.PetType;
 
 import java.io.IOException;
-import java.text.Format;
-import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
 
 /**
@@ -41,14 +37,6 @@ public class JacksonCustomPetSerializer extends StdSerializer<Pet> {
 
         gen.writeStringField("name", pet.getName());
         gen.writeStringField("birthDate", pet.getBirthDate().format(formatter));
-
-        final PetType petType = pet.getPetType();
-        // petType : start
-        gen.writeObjectFieldStart("type");
-        gen.writeNumberField("id", petType.getId());
-        gen.writeStringField("name", petType.getName());
-        gen.writeEndObject();
-        // petType : end
 
         // pet : end
         gen.writeEndObject();

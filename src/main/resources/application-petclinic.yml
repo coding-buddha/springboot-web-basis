@@ -2,4 +2,4 @@
 spring:
   datasource:
     schema: classpath:db/h2/petclinic-schema.sql  # spring boot startup 시, 특정 경로의 petclinic-schema.sql 실행
-    data: classpath:db/h2/petclinic-data.sql      # spring boot startup 시, 특정 경로의 petclinic-data.sql 실행
+#    data: classpath:db/h2/petclinic-data.sql      # spring boot startup 시, 특정 경로의 petclinic-data.sql 실행

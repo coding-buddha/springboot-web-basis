@@ -3,7 +3,6 @@ spring:
     active:
     include:
       - override
-      - member
 #      - petclinic
 
 server:

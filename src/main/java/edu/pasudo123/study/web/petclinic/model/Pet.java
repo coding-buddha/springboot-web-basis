@@ -1,61 +1,35 @@
 package edu.pasudo123.study.web.petclinic.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import edu.pasudo123.study.web.petclinic.deserialize.JacksonCustomPetDeserializer;
-import edu.pasudo123.study.web.petclinic.serialize.JacksonCustomPetSerializer;
-import lombok.Getter;
-import lombok.Setter;
-import org.springframework.beans.support.MutableSortDefinition;
-import org.springframework.beans.support.PropertyComparator;
+import lombok.*;
 
 import javax.persistence.*;
-import java.security.acl.Owner;
 import java.time.LocalDateTime;
-import java.util.*;
-import java.util.stream.Collectors;
 
-@Setter
 @Getter
 @Entity
-@Table(name = "pet")
+@Table(name = "pets")
 @JsonSerialize(using = JacksonCustomPetSerializer.class)
 @JsonDeserialize(using = JacksonCustomPetDeserializer.class)
-public class Pet extends NamedEntity {
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+public class Pet {
 
-    @Column(name = "birth_date")
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id", columnDefinition = "BIGINT", nullable = false)
+    protected Long id;
+
+    @Column(name = "name", columnDefinition = "VARCHAR(50)", nullable = false)
+    private String name;
+
+    @Column(name = "birth_date", columnDefinition = "DATETIME", nullable = false)
     private LocalDateTime birthDate;
 
-    @ManyToOne
-    @JoinColumn(name = "type_id")
-    private PetType petType;
-
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "pet", fetch = FetchType.LAZY)
-    private Set<Visit> visits;
-
-    @JsonIgnore
-    protected Set<Visit> getVisitsInternal() {
-        if(this.visits == null) {
-            this.visits = new HashSet<>();
-        }
-
-        return this.visits;
-    }
-
-    protected void setVisitsInternal(final Set<Visit> visits) {
-        this.visits = visits;
-    }
-
-    public List<Visit> getVisits() {
-        List<Visit> sortedVisits = new ArrayList<>(getVisitsInternal()).stream()
-                .sorted(Comparator.comparing(Visit::getDate))
-                .collect(Collectors.toList());
-        return Collections.unmodifiableList(sortedVisits);
-    }
-
-    public void addVisit(Visit visit) {
-        getVisitsInternal().add(visit);
-        visit.setPet(this);
+    @Builder
+    public Pet(Long id, LocalDateTime birthDate, String name) {
+        this.id = id;
+        this.birthDate = birthDate;
+        this.name = name;
     }
 }
